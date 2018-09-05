@@ -1,0 +1,67 @@
+﻿
+
+@model User
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        input[type=text], input[type=password] {
+            width: 30%;
+            padding: 4px 8px;
+            margin: 5px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            border-radius: 3px;
+        }
+
+        #btnLogin, #btnRegister {
+            box-shadow: 0 2px 3px 0 rgba(0,0,0,0.2), 0 2px 3px 0 rgba(0,0,0,0.19);
+            border: none;
+            padding: 3px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 3px 2px;
+            cursor: pointer;
+            background-color: #e7e7e7;
+            color: black;
+            border-radius: 3px;
+            border: 0.5px solid #8c8c8c;
+        }
+    </style>
+</head>
+<body>
+    <div style="width: 100%;" align="center">
+
+        <form method="post">
+
+            <h1>Login</h1>
+            <hr>
+            <p style="color:red;">@ViewData["NotLogged"]</p>
+            <label for="login">Usuário: </label> <br>
+            <input type="text" placeholder="Digite o usuário" name="login" required><br>
+
+            <label for="psw">Senha: </label> <br>
+            <input type="password" placeholder="Digite a senha" name="psw" required><br>
+            <p style="color:red;">@ViewData["LoginError"]</p>
+            <input id="btnLogin" type="submit" value="Login">
+
+        </form>
+
+        <form action="Home/Register" method="get">
+
+            <input id="btnRegister" type="submit" value="Cadastrar">
+
+        </form>
+    </div>
+
+</body>
+</html>

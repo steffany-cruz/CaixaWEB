@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewData["Title"] = "Deposit";
+}
+@model CaixaModel
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+
+        input[type=text] {
+            width: 18%;
+            padding: 4px 8px;
+            margin: 5px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            border-radius: 3px;
+        }
+        button, #btnSub {
+            box-shadow: 0 2px 3px 0 rgba(0,0,0,0.2), 0 2px 3px 0 rgba(0,0,0,0.19);
+            border: none;
+            padding: 3px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px 2px;
+            cursor: pointer;
+            background-color: #e7e7e7;
+            color: black;
+            border-radius: 3px;
+            border: 0.5px solid #8c8c8c;
+        }
+
+    </style>
+
+</head>
+
+<body>
+    <div style="width: 100%;">
+        
+        <form action="Deposit">
+            <h2>Depósito</h2>
+            <hr>
+            <h4>Saldo: R$ <label id="Saldo" for="balance">@ViewData["Saldo"]</label></h4>
+        </form>
+
+        <form action="Deposit" method="post">
+            <h3>Efetue um depósito</h3>
+            <input id="Value" type="text" placeholder="Valor a depositar" name="value"><br>
+
+            <b id="Deposit">@Model.Deposit</b>
+            <br>
+
+        </form>
+
+        <button id="btnSub">Depositar</button>
+        
+        <form method="get">
+            <button type="submit" formaction="LogInfo">Ver log</button>
+            <button type="submit" formaction="Options">Voltar</button>
+            <button type="submit" formaction="LogOut">Sair</button><br>
+        </form>
+
+    </div>
+</body>
+</html>
+
+@section Scripts{
+    <script>
+    $(document).ready(function () {
+        $("#btnSub").click(function () {
+            $.ajax({
+                url: '@Url.Action("DepositAjax")',
+                data: { value: $("#Value").val() },
+                success: function (r) {
+                    console.log("teste");
+                    $("#Deposit").html(r.deposit);
+                    $("#Saldo").html(r.user.accountBalance);
+                }
+            });
+        });
+    });
+
+    </script>
+}

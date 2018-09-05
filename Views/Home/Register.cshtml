@@ -1,0 +1,70 @@
+﻿
+@model User
+@{
+
+}
+
+@{
+    ViewData["Title"] = "Cadastro";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        input[type=text], input[type=password] {
+            width: 40%;
+            padding: 4px 8px;
+            margin: 1px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        #btnSub {
+            box-shadow: 0 2px 3px 0 rgba(0,0,0,0.2), 0 2px 3px 0 rgba(0,0,0,0.19);
+            border: none;
+            padding: 3px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            background-color: #e7e7e7;
+            color: black;
+            border-radius: 3px;
+            border: 0.5px solid #8c8c8c;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form action="Register" method="post">
+
+        <h2>Cadastrar novo usuário</h2>
+        <hr>
+        <label for="login">Informe o login: </label> <br>
+
+        <input id="login" type="text" name="login" required><br>
+
+        <label for="psw">Informe a senha: </label><br>
+
+        <input id="psw" type="password" name="psw" required><br>
+
+        <label for="psw">Confirme a senha: </label><br>
+
+        <input id="confpsw" type="password" name="confpsw" required><br>
+
+        <p style="color:red;">@ViewData["Error"]</p>
+        <input id="btnSub" type="submit" value="Cadastrar">
+
+    </form>
+
+</body>
+</html>
+
+
+
+

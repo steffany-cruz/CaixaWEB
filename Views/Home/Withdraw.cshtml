@@ -1,0 +1,103 @@
+﻿@model CaixaModel
+
+@{
+    ViewData["Title"] = "Caixa Eletrônico";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+
+        input[type=text] {
+            width: 16%;
+            padding: 4px 8px;
+            margin: 5px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            border-radius: 3px;
+        }
+        button {
+            box-shadow: 0 2px 3px 0 rgba(0,0,0,0.2), 0 2px 3px 0 rgba(0,0,0,0.19);
+            border: none;
+            padding: 3px 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            margin: 4px 2px;
+            cursor: pointer;
+            background-color: #e7e7e7;
+            color: black;
+            border-radius: 3px;
+            border: 0.5px solid #8c8c8c;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="width: 100%;">
+
+        <form action="Withdraw">
+            <h2>Saque</h2>
+            <hr>
+
+            <h4>Saldo: R$ <label id="Saldo" for="balance">@ViewData["Saldo"]</label></h4>
+
+            <div id="Notas">
+                Notas disponíveis <br>
+                Notas de R$100: <strong id="n100">@Model.N100</strong> <br>
+                Notas de R$50: <strong id="n50">@Model.N50</strong> <br>
+                Notas de R$20: <strong id="n20">@Model.N20</strong> <br>
+                Notas de R$10: <strong id="n10">@Model.N10</strong> <br>
+                Notas de R$5: <strong id="n5">@Model.N5</strong> <br>
+                Notas de R$2: <strong id="n2">@Model.N2</strong> <br>
+            </div>
+
+        </form>
+
+        <form action="Withdraw" method="post">
+            <h3>Efetue um saque</h3>
+            <input id="Value" type="text" placeholder="Valor a sacar" name="valor"><br>
+            <b id="Resultado">@Model.Resultado</b>
+            <br>
+        </form>
+
+        <button id="Saque">Sacar</button>
+        
+        <form method="get">
+            <button id="btnLog" type="submit" formaction="LogInfo">Ver log</button>
+            <button id="btnOptions" type="submit" formaction="Options">Voltar</button>
+            <button id="btnLogout" type="submit" formaction="LogOut">Sair</button><br>
+        </form>
+
+    </div>
+</body>
+</html>
+
+@section Scripts{
+<script>
+    $(document).ready(function () {
+        $("#Saque").click(function () {
+            $.ajax({
+                url: '@Url.Action("WithdrawAjax")',
+                data: { valor: $("#Value").val() },
+                success: function (r) {
+                    console.log("teste");
+                    $("#Resultado").html(r.resultado);
+                    $("#n100").html(r.n100);
+                    $("#n50").html(r.n50);
+                    $("#n20").html(r.n20);
+                    $("#n10").html(r.n10);
+                    $("#n5").html(r.n5);
+                    $("#n2").html(r.n2);
+                    $("#Saldo").html(r.user.accountBalance);
+                }
+            });
+        });
+    });
+
+</script>
+
+}
